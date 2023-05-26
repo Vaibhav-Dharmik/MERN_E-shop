@@ -1,0 +1,20 @@
+{
+  "name": "mern_stack_e-commerce",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000M\u0000E\u0000R\u0000N\u0000_\u0000E\u0000-\u0000s\u0000h\u0000o\u0000p\u0000\r\u0000 \u0000# MERN_E-shop",
+  "main": "backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vaibhav Dharmik",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.1",
+    "nodemailer": "^6.9.2",
+    "nodemon": "^2.0.22"
+  }
+}
