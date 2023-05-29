@@ -3,6 +3,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "../../styles/styles";
 import { Link } from "react-router-dom";
 import { RxAvatar } from "react-icons/rx";
+import axios from "axios";
+import { server } from "../../server";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -12,12 +14,28 @@ const Signup = () => {
   const [avatar, setAvatar] = useState(null);
 
   const handleFileInputChange = (e) => {
-    const file = e.target.files(0);
+    const file = e.target.files[0];
     setAvatar(file);
   };
 
   const handleSubmit = async (e) => {
     console.log("first");
+    const config = { headers: { "Content-Type": "multipart/form-data" } };
+    const newForm = new FormData();
+
+    newForm.append("file", avatar);
+    newForm.append("name", name);
+    newForm.append("email", email);
+    newForm.append("password", password);
+
+    axios
+      .post(`${server}/user/create-user`, newForm, config)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
