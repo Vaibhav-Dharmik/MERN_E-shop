@@ -10,13 +10,14 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatar, setAvatar] = useState(null);
-  const handleSubmit = () => {
-    console.log("first");
-  };
 
   const handleFileInputChange = (e) => {
     const file = e.target.files(0);
     setAvatar(file);
+  };
+
+  const handleSubmit = async (e) => {
+    console.log("first");
   };
 
   return (
@@ -27,7 +28,7 @@ const Signup = () => {
         </h2>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-            <form action="" className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="">
                 <label
                   htmlFor="email"
