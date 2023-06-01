@@ -9,13 +9,22 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
   const { name, email, password } = req.body;
   const userEmail = await User.findOne({ email });
   if (userEmail) {
+    const filename = req.file.filename;
+    const filePath = `uploads/${filename}`;
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error deleting file" });
+      } else {
+        res.json({ message: "File deleted successfully" });
+      }
+    });
+
     return next(new ErrorHandler("user already exists", 400));
   }
 
   const filename = req.file.filename;
   const fileUrl = path.join(filename);
-
-  //   const avatar=f
 
   const user = {
     name: name,
@@ -23,7 +32,14 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     password: password,
     avatar: fileUrl,
   };
-  console.log(user);
+  const activationToken = "http://localhost:3000/activation/${activationToken}";
+
+  //   console.log(user);
+  const newUser = await User.create(user);
+  res.status(201).json({
+    success: true,
+    newUser,
+  });
 });
 
 module.exports = router;
